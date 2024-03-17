@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <span>Hello, @User.Identity.Name!</span>
+    <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
+        <button type="submit" class="nav-link btn btn-link">Logout</button>
+    </form>
+}
+else
+{
+    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/ExternalLogin" asp-route-provider="GitHub">Sign in with GitHub</a>
+    <a asp-controller="Account" asp-action="Login" class="nav-link">Login</a>
+    <a asp-controller="Account" asp-action="Register" class="nav-link">Register</a>
+}
